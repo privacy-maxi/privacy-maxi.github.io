@@ -1,0 +1,451 @@
+{
+ "as_of": "2026-11-17",
+ "tiers": [
+  {
+   "id": "S",
+   "definition": "In production or mainnet for about 2 years or more, maintained in the last 6 months, and a category leader by measurable adoption or reference status."
+  },
+  {
+   "id": "A",
+   "definition": "Live in production or mainnet with real, evidenced usage, maintained in the last 6 to 12 months."
+  },
+  {
+   "id": "B",
+   "definition": "Early mainnet, beta or limited usage, or a public testnet with active development in the last 6 months."
+  },
+  {
+   "id": "C",
+   "definition": "Research, spec, devnet, announced, hackathon-stage, or dormant (no visible activity for 12 months or more, death not confirmed)."
+  },
+  {
+   "id": "D",
+   "definition": "Graveyard: confirmed shut down, abandoned (site gone and no activity for 24 months or more), sanctioned or seized, or pivoted away from privacy."
+  },
+  {
+   "id": "unrated",
+   "definition": "Listed without a tier while evidence is checked."
+  }
+ ],
+ "categories": [
+  {
+   "id": "privacy-coins",
+   "name": "Privacy coins",
+   "description": "Layer 1 currencies with private transfers, plus privacy features of other coins",
+   "appendix": false,
+   "total": 260,
+   "by_tier": {
+    "S": 2,
+    "A": 20,
+    "B": 49,
+    "C": 58,
+    "D": 118,
+    "unrated": 13
+   }
+  },
+  {
+   "id": "private-smart-contract-chains",
+   "name": "Private smart contract chains",
+   "description": "Chains and rollups that run contracts on private state",
+   "appendix": false,
+   "total": 51,
+   "by_tier": {
+    "S": 0,
+    "A": 10,
+    "B": 12,
+    "C": 20,
+    "D": 8,
+    "unrated": 1
+   }
+  },
+  {
+   "id": "shielded-pools-mixers",
+   "name": "Shielded pools and mixers",
+   "description": "Pools and mixers that break the link between deposits and withdrawals",
+   "appendix": false,
+   "total": 168,
+   "by_tier": {
+    "S": 1,
+    "A": 6,
+    "B": 48,
+    "C": 74,
+    "D": 36,
+    "unrated": 3
+   }
+  },
+  {
+   "id": "confidential-tokens",
+   "name": "Confidential tokens",
+   "description": "Token standards and assets with hidden balances or amounts",
+   "appendix": false,
+   "total": 63,
+   "by_tier": {
+    "S": 0,
+    "A": 2,
+    "B": 21,
+    "C": 35,
+    "D": 5,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "stealth-addresses",
+   "name": "Stealth addresses",
+   "description": "One-time receive addresses that hide who got paid",
+   "appendix": false,
+   "total": 39,
+   "by_tier": {
+    "S": 2,
+    "A": 2,
+    "B": 4,
+    "C": 30,
+    "D": 1,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "wallets-payments",
+   "name": "Wallets and payments",
+   "description": "Wallets, payment apps and processors with privacy features",
+   "appendix": false,
+   "total": 274,
+   "by_tier": {
+    "S": 3,
+    "A": 21,
+    "B": 96,
+    "C": 133,
+    "D": 21,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "swaps-exchanges",
+   "name": "Swaps and exchanges",
+   "description": "No-KYC swaps, atomic swaps, private exchanges and on-ramps",
+   "appendix": false,
+   "total": 205,
+   "by_tier": {
+    "S": 1,
+    "A": 32,
+    "B": 65,
+    "C": 78,
+    "D": 22,
+    "unrated": 7
+   }
+  },
+  {
+   "id": "dark-pools-private-trading",
+   "name": "Dark pools and private trading",
+   "description": "Venues that hide orders, sizes or counterparties",
+   "appendix": false,
+   "total": 194,
+   "by_tier": {
+    "S": 0,
+    "A": 6,
+    "B": 28,
+    "C": 153,
+    "D": 7,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "mev-encrypted-mempools",
+   "name": "MEV and encrypted mempools",
+   "description": "Private orderflow, encrypted mempools and protected RPCs",
+   "appendix": false,
+   "total": 40,
+   "by_tier": {
+    "S": 2,
+    "A": 5,
+    "B": 6,
+    "C": 17,
+    "D": 8,
+    "unrated": 2
+   }
+  },
+  {
+   "id": "bitcoin-privacy",
+   "name": "Bitcoin privacy",
+   "description": "CoinJoin, Lightning privacy, ecash and other Bitcoin privacy tools",
+   "appendix": false,
+   "total": 275,
+   "by_tier": {
+    "S": 6,
+    "A": 22,
+    "B": 69,
+    "C": 130,
+    "D": 48,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "mixnets-anonymity-networks",
+   "name": "Mixnets and anonymity networks",
+   "description": "Networks that hide who talks to whom",
+   "appendix": false,
+   "total": 38,
+   "by_tier": {
+    "S": 3,
+    "A": 6,
+    "B": 7,
+    "C": 17,
+    "D": 4,
+    "unrated": 1
+   }
+  },
+  {
+   "id": "dvpn-bandwidth",
+   "name": "dVPN and bandwidth",
+   "description": "Decentralized VPNs and bandwidth markets",
+   "appendix": false,
+   "total": 52,
+   "by_tier": {
+    "S": 2,
+    "A": 4,
+    "B": 21,
+    "C": 19,
+    "D": 6,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "query-read-privacy",
+   "name": "Query and read privacy",
+   "description": "Private RPC, PIR, light clients and private chain reads",
+   "appendix": false,
+   "total": 42,
+   "by_tier": {
+    "S": 1,
+    "A": 9,
+    "B": 11,
+    "C": 18,
+    "D": 1,
+    "unrated": 2
+   }
+  },
+  {
+   "id": "messaging-social",
+   "name": "Messaging and social",
+   "description": "Private messaging, email and social apps",
+   "appendix": false,
+   "total": 152,
+   "by_tier": {
+    "S": 4,
+    "A": 15,
+    "B": 40,
+    "C": 82,
+    "D": 11,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "storage-data-access",
+   "name": "Storage and data access",
+   "description": "Encrypted storage and private data access",
+   "appendix": false,
+   "total": 89,
+   "by_tier": {
+    "S": 1,
+    "A": 8,
+    "B": 17,
+    "C": 57,
+    "D": 6,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "zk-identity-credentials",
+   "name": "ZK identity and credentials",
+   "description": "Private identity, credentials and proof of personhood",
+   "appendix": false,
+   "total": 189,
+   "by_tier": {
+    "S": 2,
+    "A": 20,
+    "B": 30,
+    "C": 116,
+    "D": 20,
+    "unrated": 1
+   }
+  },
+  {
+   "id": "zktls-private-data",
+   "name": "zkTLS and private data",
+   "description": "Proofs about web data without revealing it",
+   "appendix": false,
+   "total": 41,
+   "by_tier": {
+    "S": 1,
+    "A": 4,
+    "B": 4,
+    "C": 27,
+    "D": 4,
+    "unrated": 1
+   }
+  },
+  {
+   "id": "private-voting-governance",
+   "name": "Private voting and governance",
+   "description": "Secret ballots and private governance",
+   "appendix": false,
+   "total": 62,
+   "by_tier": {
+    "S": 1,
+    "A": 7,
+    "B": 7,
+    "C": 40,
+    "D": 7,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "private-ai",
+   "name": "Private AI",
+   "description": "Private inference, training and AI with confidential inputs",
+   "appendix": false,
+   "total": 77,
+   "by_tier": {
+    "S": 1,
+    "A": 6,
+    "B": 26,
+    "C": 38,
+    "D": 4,
+    "unrated": 2
+   }
+  },
+  {
+   "id": "fhe",
+   "name": "FHE",
+   "description": "Fully homomorphic encryption networks and libraries",
+   "appendix": false,
+   "total": 24,
+   "by_tier": {
+    "S": 0,
+    "A": 1,
+    "B": 11,
+    "C": 12,
+    "D": 0,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "mpc-threshold",
+   "name": "MPC and threshold",
+   "description": "Multi-party computation and threshold cryptography networks",
+   "appendix": false,
+   "total": 24,
+   "by_tier": {
+    "S": 0,
+    "A": 4,
+    "B": 10,
+    "C": 8,
+    "D": 2,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "tee-confidential-compute",
+   "name": "TEE and confidential compute",
+   "description": "Trusted execution environments and confidential compute",
+   "appendix": false,
+   "total": 37,
+   "by_tier": {
+    "S": 2,
+    "A": 5,
+    "B": 14,
+    "C": 13,
+    "D": 3,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "dev-tooling-libraries",
+   "name": "Developer tooling and libraries",
+   "description": "Proving systems, SDKs and libraries for building private apps",
+   "appendix": false,
+   "total": 165,
+   "by_tier": {
+    "S": 2,
+    "A": 31,
+    "B": 63,
+    "C": 61,
+    "D": 8,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "research-standards",
+   "name": "Research and standards",
+   "description": "Specs, standards and research groups",
+   "appendix": false,
+   "total": 225,
+   "by_tier": {
+    "S": 6,
+    "A": 20,
+    "B": 21,
+    "C": 169,
+    "D": 7,
+    "unrated": 2
+   }
+  },
+  {
+   "id": "enterprise-institutional",
+   "name": "Enterprise and institutional",
+   "description": "Privacy products for institutions and enterprises",
+   "appendix": false,
+   "total": 41,
+   "by_tier": {
+    "S": 2,
+    "A": 3,
+    "B": 16,
+    "C": 12,
+    "D": 8,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "self-hosting-hardware",
+   "name": "Self-hosting and hardware",
+   "description": "Node software, self-hosting kits and hardware",
+   "appendix": false,
+   "total": 52,
+   "by_tier": {
+    "S": 3,
+    "A": 20,
+    "B": 18,
+    "C": 8,
+    "D": 3,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "communities-funding-education",
+   "name": "Communities, funding and education",
+   "description": "Communities, grant programs, nonprofits and learning resources",
+   "appendix": true,
+   "total": 81,
+   "by_tier": {
+    "S": 5,
+    "A": 24,
+    "B": 24,
+    "C": 27,
+    "D": 1,
+    "unrated": 0
+   }
+  },
+  {
+   "id": "adjacent-non-web3",
+   "name": "Adjacent non-web3 tools",
+   "description": "Well-known non-crypto privacy tools used for opsec",
+   "appendix": true,
+   "total": 37,
+   "by_tier": {
+    "S": 11,
+    "A": 19,
+    "B": 6,
+    "C": 0,
+    "D": 1,
+    "unrated": 0
+   }
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+name: Claim and correct
+description: Fix a fact on a project's row, or add a missing project. One fact per issue.
+title: "[correct] <project>: <field>"
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bring a fact and a source; the rating follows the [method](https://github.com/privacy-maxi/privacy-maxi.github.io/blob/main/METHOD.md). Every issue gets a public answer within 48 hours.
+  - type: input
+    id: project
+    attributes:
+      label: Project
+      description: Name as shown on the map, or its row link.
+      placeholder: "e.g. Monero"
+    validations:
+      required: true
+  - type: dropdown
+    id: field
+    attributes:
+      label: Field
+      options:
+        - status (alive, dead, pivoted)
+        - last_activity
+        - hides
+        - trust_model
+        - privacy_default
+        - tech
+        - category
+        - ecosystems
+        - one_liner
+        - launched
+        - adoption
+        - website / github / x / docs links
+        - tier
+        - new project (add a row)
+        - other
+    validations:
+      required: true
+  - type: input
+    id: current
+    attributes:
+      label: Current value
+      description: What the map says today.
+  - type: textarea
+    id: correct
+    attributes:
+      label: Correct value
+      description: What it should say.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source link
+      description: Code, chain data, or a dated page that proves it.
+      placeholder: "https://"
+    validations:
+      required: true
+  - type: dropdown
+    id: relation
+    attributes:
+      label: Your relation to the project
+      options:
+        - Team member
+        - User
+        - Researcher
+        - Other
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Anything else that helps review.

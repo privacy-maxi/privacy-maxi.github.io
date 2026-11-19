@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>privacy maxi: every crypto privacy project, alive or dead</title>
+<meta name="description" content="Every crypto privacy project, alive or dead: what it hides, who you trust, receipts for each. Open data, open method.">
+<meta property="og:title" content="privacy maxi">
+<meta property="og:description" content="Every crypto privacy project, alive or dead: what it hides, who you trust, receipts for each.">
+<meta property="og:image" content="https://privacy-maxi.github.io/assets/avatar.png">
+<meta name="theme-color" content="#141518">
+<link rel="icon" type="image/png" href="assets/avatar.png">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the catalog</a>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="#" aria-label="privacy maxi, home">
+      <img src="assets/avatar.png" alt="" width="40" height="40">
+      <span>privacy<b>_maxi</b></span>
+    </a>
+    <nav class="top-links" aria-label="Elsewhere">
+      <a href="https://x.com/privacy_maxi" rel="noopener noreferrer">X</a>
+      <a href="https://github.com/privacy-maxi/privacy-maxi.github.io" rel="noopener noreferrer">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <section class="hero">
+    <h1>Every crypto privacy project, alive or dead.</h1>
+    <p class="lede">What it hides, who you trust, receipts for each. Every row links its sources. Spot a mistake? Every row has a correction link.</p>
+  </section>
+
+  <section class="stats" id="stats" aria-label="Catalog totals">
+    <div class="stat"><span class="stat-n">&nbsp;</span><span class="stat-l">Loading the catalog</span></div>
+  </section>
+
+  <p class="note" id="tier-note">
+    <strong>Tiers measure maturity, not quality.</strong>
+    A research paper at C can be brilliant; a coin at A can still leak. <a href="#!method">How tiers work</a>
+  </p>
+
+  <div class="tabs" role="tablist" aria-label="Views">
+    <a class="tab" id="tab-all" role="tab" href="#">Catalog</a>
+    <a class="tab" id="tab-graveyard" role="tab" href="#!graveyard">Graveyard</a>
+    <a class="tab" id="tab-method" role="tab" href="#!method">Method</a>
+  </div>
+
+  <section id="view-list" class="view" aria-live="polite">
+    <p class="grave-intro" id="grave-intro" hidden>The Graveyard: projects confirmed shut down, abandoned, sanctioned or seized, or pivoted away from privacy. Each one links the dated evidence. Newest first.</p>
+    <div class="controls">
+      <label class="search">
+        <span class="sr">Search projects</span>
+        <input id="q" type="search" placeholder="Search name, tech, what it hides  ( / )" autocomplete="off" spellcheck="false">
+      </label>
+      <div class="chips" id="tier-chips" aria-label="Filter by tier"></div>
+      <details class="cat-wrap" id="cat-wrap">
+        <summary>Categories <span id="cat-count" class="mono"></span></summary>
+        <div class="chips" id="cat-chips" aria-label="Filter by category"></div>
+      </details>
+      <div class="result-line">
+        <span id="result-count" class="mono"></span>
+        <button type="button" id="reset" class="linkish">Clear filters</button>
+      </div>
+    </div>
+    <div class="receipt table-card">
+      <table class="grid" id="grid">
+        <thead><tr id="grid-head"></tr></thead>
+        <tbody id="grid-body"></tbody>
+      </table>
+      <div class="more" id="more"></div>
+    </div>
+  </section>
+
+  <section id="view-detail" class="view" hidden></section>
+
+  <section id="view-method" class="view" hidden>
+    <article class="receipt prose">
+      <h2>Method</h2>
+      <p>Each row is one project, rated on maturity and adoption on the date shown. Every claim carries a source link, and every dead verdict rests on dated evidence: an announced shutdown, a seized domain, or years without a commit and a site that no longer answers.</p>
+      <h3>Tiers</h3>
+      <dl class="tier-defs">
+        <dt><span class="tier t-S">S</span></dt><dd>In production or on mainnet for about two years or more, maintained in the last six months, and a category leader by measurable adoption or reference status.</dd>
+        <dt><span class="tier t-A">A</span></dt><dd>Live in production or on mainnet with real, evidenced usage, maintained in the last six to twelve months.</dd>
+        <dt><span class="tier t-B">B</span></dt><dd>Early mainnet, beta or limited usage, or a public testnet with active development in the last six months.</dd>
+        <dt><span class="tier t-C">C</span></dt><dd>Research, spec, devnet, announced, hackathon stage, or dormant for twelve months or more with death unconfirmed.</dd>
+        <dt><span class="tier t-D">D</span></dt><dd>The Graveyard: confirmed shut down, abandoned (site gone and quiet for 24 months or more), sanctioned or seized, or pivoted away from privacy. Every D row carries a source.</dd>
+        <dt><span class="tier t-U">U</span></dt><dd>Unrated: listed with its facts and sources, without a tier, until the evidence is clear enough to rate.</dd>
+      </dl>
+      <p><strong>Tiers measure maturity, not quality.</strong> They say how far a project has travelled and whether it is still moving. They make no claim about how good its privacy is.</p>
+      <h3>Fields</h3>
+      <p><b>Hides</b> lists what the project keeps from observers. <b>Trust</b> names who you rely on: cryptography alone, a trusted operator, a committee or threshold, secure hardware, or a mix. <b>Default</b> says whether privacy is on for everyone or opt-in. <b>Confidence</b> grades how well the sources back the row.</p>
+      <h3>Corrections</h3>
+      <p>Projects and readers can claim or correct any row through the <a href="https://github.com/privacy-maxi/privacy-maxi.github.io/issues/new?template=claim-and-correct.yml" rel="noopener noreferrer">correction form</a>. Bring a source and the row changes.</p>
+    </article>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Catalog seeded from <a href="https://github.com/web3privacy/explorer-data" rel="noopener noreferrer">Web3Privacy Now explorer-data</a>, licensed under the <a href="https://opendatacommons.org/licenses/odbl/1-0/" rel="noopener noreferrer">Open Database License (ODbL) 1.0</a>, then extended and verified by privacy maxi. Thanks to every Web3Privacy Now contributor.</p>
+    <p>Data: <a href="data/catalog.json">catalog.json</a>. Source and issues: <a href="https://github.com/privacy-maxi/privacy-maxi.github.io" rel="noopener noreferrer">GitHub</a>. This page loads nothing from third parties: no trackers, no analytics, no external fonts.</p>
+  </div>
+</footer>
+<noscript><p class="wrap note">This catalog needs JavaScript to filter and sort. The raw data is at <a href="data/catalog.json">data/catalog.json</a>.</p></noscript>
+</body>
+</html>
