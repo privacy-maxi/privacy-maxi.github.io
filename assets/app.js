@@ -347,6 +347,21 @@
     return { years: out, undated: undated };
   }
 
+
+  /* CSV for the rows on screen; cells that a spreadsheet would run as a formula get a leading quote */
+  var CSV_COLS = ['id', 'name', 'tier', 'category', 'status', 'hides', 'trust_model', 'privacy_default', 'open_source',
+    'ecosystems', 'launched', 'last_activity', 'website', 'github', 'x', 'one_liner'];
+  function csvCell(v) {
+    var t = Array.isArray(v) ? v.join('; ') : (v === null || v === undefined ? '' : String(v));
+    if (/^[=+\-@\t\r]/.test(t)) t = "'" + t;
+    return /[",\n\r]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t;
+  }
+  function toCsv(rows) {
+    var out = [CSV_COLS.join(',')];
+    for (var i = 0; i < rows.length; i++) out.push(CSV_COLS.map(function (c) { return csvCell(rows[i][c]); }).join(','));
+    return out.join('\r\n') + '\r\n';
+  }
+
   /* ---------- HTML builders (all data passes through esc) ---------- */
 
   function tierBadge(t) {
@@ -613,6 +628,7 @@
     function renderTable() {
       var s = curSort();
       var sorted = sortRows(filterRows(state.rows, filt()), s.k, s.d);
+      state.current = sorted;
       $('grid-head').innerHTML = headHtml(s.k, s.d);
       $('grid-body').innerHTML = bodyHtml(sorted, state.limit);
       var shown = Math.min(state.limit, sorted.length);
@@ -670,14 +686,28 @@
       $('topcats').innerHTML = top.map(function (c) {
         return '<li><button type="button" data-cat="' + esc(c) + '">' + esc(catLabel(c)) + '</button><span class="m">' + esc(fmtInt(live[c])) + ' live</span></li>';
       }).join('');
+      var lv = state.rows.filter(function (r) { return r.tier === 'S' || r.tier === 'A' || r.tier === 'B'; });
+      var someone = ['trusted-operator', 'committee-threshold', 'tee', 'mixed'];
+      var tc = { c: 0, s: 0, u: 0 };
+      lv.forEach(function (r) { if (r.trust_model === 'cryptographic') tc.c++; else if (someone.indexOf(r.trust_model) >= 0) tc.s++; else tc.u++; });
+      var tsegs = [['Cryptography alone', tc.c, 'a', 'cryptographic'], ['Trusts an operator, chip or committee', tc.s, 'w', someone.join(',')], ['Not yet known', tc.u, 'c', 'unknown']];
+      $('trustbar').innerHTML = tsegs.map(function (t) { return '<span class="seg-' + t[2] + '" title="' + esc(t[0] + ': ' + t[1]) + '" data-w="' + (t[1] / (lv.length || 1) * 100).toFixed(2) + '"></span>'; }).join('');
+      $('trustl').innerHTML = tsegs.map(function (t) { return '<button type="button" data-trust="' + t[3] + '">' + esc(t[0]) + ' <b>' + esc(fmtInt(t[1])) + '</b></button>'; }).join('');
+
+      var tops = sortRows(state.rows.filter(function (r) { return r.tier === 'S'; }), 'tier', 1);
+      $('top-all').textContent = 'all ' + fmtInt(tops.length) + ' →';
+      $('toprated').innerHTML = tops.slice(0, 6).map(function (r) {
+        return '<li><a href="' + esc(hashFor(r.id)) + '" translate="no">' + esc(r.name) + '</a><span class="m">' + esc(catLabel(r.category)) + '</span></li>';
+      }).join('');
       applySizes($('panels'));
     }
 
-    function showCatalogWith(facet, values) {
+    function showCatalogWith(facet, values, extra) {
       FACETS.forEach(function (f) { state.sel[f.key].clear(); });
       state.q = ''; $('q').value = '';
       values.forEach(function (v) { state.sel[facet].add(v); });
       state.open[facet] = true;
+      if (extra) Object.keys(extra).forEach(function (k) { extra[k].forEach(function (v) { state.sel[k].add(v); }); });
       state.scrollTo = true;
       state.dirty = true;
       if (root.location.hash && root.location.hash !== '#') { root.location.hash = ''; return; } /* hashchange runs route() */
@@ -688,6 +718,11 @@
       var b = e.target.closest('button[data-tiers]');
       if (b) showCatalogWith('tier', b.getAttribute('data-tiers').split(','));
     });
+    $('trustl').addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-trust]');
+      if (b) showCatalogWith('trust', b.getAttribute('data-trust').split(','), { tier: ['S', 'A', 'B'] });
+    });
+    $('top-all').addEventListener('click', function () { showCatalogWith('tier', ['S']); });
     $('topcats').addEventListener('click', function (e) {
       var b = e.target.closest('button[data-cat]');
       if (b) showCatalogWith('cat', [b.getAttribute('data-cat')]);
@@ -885,13 +920,14 @@
       var g = next === 'graveyard';
       $('hero').hidden = g;
       $('grave-hero').hidden = !g;
-      $('p-tiers').hidden = g;
+      ['p-trust', 'p-top', 'p-tiers'].forEach(function (id) { $(id).hidden = g; });
+      ['p-years', 'p-graves'].forEach(function (id) { $(id).hidden = !g; });
       $('panels').classList.toggle('two', g);
       $('tier-note').hidden = g;
       if (changed || force || state.dirty) { state.dirty = false; refresh(); }
       setNav(next);
       views.list.hidden = false;
-      doc.title = g ? 'The Graveyard | privacy maxi' : 'privacy maxi: every crypto privacy project, alive or dead';
+      doc.title = g ? 'The Graveyard | privacy maxi' : 'privacy maxi: every crypto privacy project, mapped';
       if (state.scrollTo) {
         state.scrollTo = false;
         $('catalog').scrollIntoView();
@@ -988,6 +1024,26 @@
       renderTable();
     });
 
+    $('csv').addEventListener('click', function () {
+      var rows = state.current || [];
+      var blob = new Blob([toCsv(rows)], { type: 'text/csv;charset=utf-8' });
+      var a = doc.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'privacy-map-' + rows.length + '-projects.csv';
+      doc.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    });
+
+    fetch('data/meta.json', { cache: 'no-cache', credentials: 'omit' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (m) {
+        if (!m || !/^\d{4}-\d{2}-\d{2}$/.test(m.updated || '')) return;
+        var d = new Date(m.updated + 'T00:00:00Z');
+        var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        $('updated').textContent = ' · data checked ' + MON[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+      })
+      .catch(function () { /* the date is optional */ });
+
     root.addEventListener('hashchange', function () { route(false); });
 
     readUrl();
@@ -1012,7 +1068,7 @@
     esc: esc, safeUrl: safeUrl, xUrl: xUrl, catLabel: catLabel, hostOf: hostOf, fmtInt: fmtInt,
     normalize: normalize, computeStats: computeStats, categoryCounts: categoryCounts, graveYears: graveYears,
     filterRows: filterRows, facetCounts: facetCounts, sortRows: sortRows, findById: findById, correctionUrl: correctionUrl,
-    rowHtml: rowHtml, bodyHtml: bodyHtml, headHtml: headHtml, detailHtml: detailHtml, statsHtml: statsHtml, FACETS: FACETS
+    rowHtml: rowHtml, bodyHtml: bodyHtml, toCsv: toCsv, headHtml: headHtml, detailHtml: detailHtml, statsHtml: statsHtml, FACETS: FACETS
   };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

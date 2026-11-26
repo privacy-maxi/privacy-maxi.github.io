@@ -5,11 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
-<title>privacy maxi: every crypto privacy project, alive or dead</title>
-<meta name="description" content="Every crypto privacy project, alive or dead: what it hides, who you trust, receipts for each. Open data, open method.">
-<meta property="og:title" content="privacy maxi">
-<meta property="og:description" content="Every crypto privacy project, alive or dead: what it hides, who you trust, receipts for each.">
-<meta property="og:image" content="https://privacy-maxi.github.io/assets/avatar.png">
+<title>privacy maxi: every crypto privacy project, mapped</title>
+<meta name="description" content="Every crypto privacy project, mapped: what each one hides, who you have to trust, and a source for every claim. Open data, open method.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://privacy-maxi.github.io/">
+<meta property="og:title" content="The privacy map: every crypto privacy project, mapped">
+<meta property="og:description" content="What each crypto privacy project hides, who you have to trust, and a source for every claim. Open data, open method.">
+<meta property="og:image" content="https://privacy-maxi.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Every crypto privacy project as a dot, grouped by category, with live projects in lime">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@privacy_maxi">
+<meta name="twitter:image" content="https://privacy-maxi.github.io/assets/og.png">
 <meta name="theme-color" content="#0b0d10">
 <link rel="icon" type="image/png" href="assets/avatar.png">
 <link rel="preload" href="assets/fonts/JetBrainsMono-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -45,8 +53,8 @@
   <section id="view-list" class="view">
     <section class="hero" id="hero">
       <div>
-        <p class="kicker">The privacy map</p>
-        <h1>Every crypto privacy project, <em>alive or dead.</em></h1>
+        <p class="kicker">The privacy map<span id="updated"></span></p>
+        <h1>Every crypto privacy project, <em>mapped.</em></h1>
         <p class="lede">What each one hides from you, <span class="redact" tabindex="0">who you have to trust</span>, and a dated receipt for every call. Teams can correct any row with a source.</p>
       </div>
       <div class="stats" id="stats" aria-label="Catalog totals">
@@ -61,15 +69,15 @@
     </section>
 
     <section class="panels" id="panels" aria-label="Summary">
-      <div class="panel" id="p-years">
-        <h2>Graveyard by year <a href="#!graveyard" id="p-years-link">all →</a></h2>
-        <div class="bars" id="bars"></div>
-        <div class="yrs" id="yrs"></div>
-        <p class="cap">Year of last sign of life, dead projects only</p>
+      <div class="panel" id="p-trust">
+        <h2>Who you trust <a href="#!method">what this means →</a></h2>
+        <div class="tierbar" id="trustbar"></div>
+        <div class="tl tl1" id="trustl"></div>
+        <p class="cap">Live projects only, tiers S to B. Click one to list them.</p>
       </div>
-      <div class="panel" id="p-graves">
-        <h2>Recently buried <a href="#!graveyard">graveyard →</a></h2>
-        <ul class="list" id="graves"></ul>
+      <div class="panel" id="p-top">
+        <h2>Top rated <button type="button" class="h2btn" data-tiers="S" id="top-all">all →</button></h2>
+        <ul class="list" id="toprated"></ul>
       </div>
       <div class="panel" id="p-tiers">
         <h2>By tier <a href="#!method">how tiers work →</a></h2>
@@ -77,6 +85,16 @@
         <div class="tl" id="tl"></div>
         <h2 class="h2-gap">Busiest categories <a href="#!map">map →</a></h2>
         <ul class="list" id="topcats"></ul>
+      </div>
+      <div class="panel" id="p-years" hidden>
+        <h2>Graveyard by year <a href="#!graveyard" id="p-years-link">all →</a></h2>
+        <div class="bars" id="bars"></div>
+        <div class="yrs" id="yrs"></div>
+        <p class="cap">Year of last sign of life, dead projects only</p>
+      </div>
+      <div class="panel" id="p-graves" hidden>
+        <h2>Recently buried <a href="#!graveyard">graveyard →</a></h2>
+        <ul class="list" id="graves"></ul>
       </div>
     </section>
 
@@ -98,6 +116,7 @@
             <input id="q" type="search" placeholder="Search name, tech, what it hides  ( / )" autocomplete="off" spellcheck="false">
           </label>
           <button type="button" class="chip f-toggle" id="f-toggle" aria-controls="filters" aria-expanded="false">Filters <span class="mono" id="f-count"></span></button>
+          <button type="button" class="chip csvbtn" id="csv" title="Download the rows shown, with your filters, as a CSV file">CSV</button>
           <label class="sortsel">
             <span class="sr">Sort by</span>
             <select id="sort">
