@@ -207,6 +207,17 @@
   function numCmp(a, b) { return a - b; }
   function strCmp(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
 
+  /* flagship projects first within a tier in the default view, so the first screen shows what people know */
+  var FEATURED = ['Zcash', 'Monero', 'Tor', 'Signal', 'Cake Wallet', 'Wasabi Wallet', 'Privacy Pools', 'Aztec', 'Zama',
+    'TornadoCash', 'Brave Browser', 'Mullvad VPN', 'Proton Mail', 'Session', 'SimpleX Chat', 'Phala Network',
+    'Secret Network', 'Oasis Network', 'Aleo', 'Namada', 'Mina', 'Umbra', 'Umbra Privacy', 'Sparrow', 'Bisq', 'Zodl'];
+  var FEAT_RANK = {};
+  FEATURED.forEach(function (n, i) { FEAT_RANK[n.toLowerCase()] = i; });
+  function featRank(r) {
+    var k = (r.name || '').toLowerCase();
+    return Object.prototype.hasOwnProperty.call(FEAT_RANK, k) ? FEAT_RANK[k] : FEATURED.length;
+  }
+
   function sortRows(rows, key, dir) {
     dir = dir === -1 ? -1 : 1;
     var cmp;
@@ -224,7 +235,7 @@
       case 'confidence':
         cmp = function (a, b) { return nullsLast(CONF_RANK[a.confidence], CONF_RANK[b.confidence], dir, numCmp) || byName(a, b); }; break;
       default:
-        cmp = function (a, b) { return nullsLast(TIER_RANK[a.tier], TIER_RANK[b.tier], dir, numCmp) || byName(a, b); };
+        cmp = function (a, b) { return nullsLast(TIER_RANK[a.tier], TIER_RANK[b.tier], dir, numCmp) || featRank(a) - featRank(b) || byName(a, b); };
     }
     return rows.slice().sort(cmp);
   }
