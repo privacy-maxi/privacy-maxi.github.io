@@ -37,7 +37,7 @@ source. Full rules in [METHOD.md](METHOD.md).
 
 Spot something wrong or missing? Open a
 [claim and correct issue](https://github.com/privacy-maxi/privacy-maxi.github.io/issues/new?template=claim-and-correct.yml):
-project, field, correct value, source link. Projects bring facts; we keep the rating. Corrections land in public
+project, field, correct value, source link. Projects bring facts, and the rating stays ours. Corrections land in public
 within 48 hours. Details in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Independence

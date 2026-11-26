@@ -39,8 +39,8 @@ Every grave has a way back: a team that is still building opens an issue with pr
 ## 3. Sources policy
 
 - Every claim points to something a reader can check: code, chain data, or a dated page.
-- Preferred, in order: on-chain data and the project's own code; the project's own docs, releases and notices;
-  court, regulator and sanction records; independent research and reputable reporting; aggregators.
+- Preferred, in order: (1) on-chain data and the project's own code, (2) the project's own docs, releases and
+  notices, (3) court, regulator and sanction records, (4) independent research and reputable reporting, (5) aggregators.
 - Adoption figures (market cap, TVL, users, stars) always carry their source and the date measured. Check the
   linked source before quoting a number.
 - We rate mechanisms, not people. "The upgrade key can change the verifier with no delay" is a finding. Intent
@@ -71,7 +71,7 @@ and credited to the person who sent them. Errors we publish get a public correct
 ## 6. Right of reply
 
 Before a Receipt goes out, the project's official contact receives the draft card and has 72 hours to correct facts
-or send a quote. Teams correct facts; the rating stays ours. We print their reply in full, or "no reply by
+or send a quote. Teams correct facts, and the rating stays ours. We print their reply in full, or "no reply by
 publication".
 
 ## 7. Independence

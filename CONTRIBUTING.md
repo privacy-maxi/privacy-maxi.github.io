@@ -18,7 +18,7 @@ court or regulator record. Every fact in the data points to one.
 
 ## The rules
 
-- **Projects bring facts; we keep the rating.** Tiers follow [METHOD.md](METHOD.md). Show a fact that meets a
+- **Projects bring facts, and the rating stays ours.** Tiers follow [METHOD.md](METHOD.md). Show a fact that meets a
   tier's definition and the tier moves with it.
 - **Rate mechanisms, not people.** Corrections and comments stay on what the system does.
 - **Everything happens in public.** Merged corrections are logged and the contributor is credited.
@@ -26,7 +26,7 @@ court or regulator record. Every fact in the data points to one.
 ## Pull requests
 
 Pull requests to the data are welcome. Edit the row, put the source in its `sources` list, and link the issue.
-Pull requests to the site code are welcome too; open an issue first for anything large.
+Pull requests to the site code are welcome too. For anything large, open an issue first.
 
 ## Licences
 
